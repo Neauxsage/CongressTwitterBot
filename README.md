@@ -1,5 +1,7 @@
 # CongressTwitterBot
 
+ALL.PY
+•	Runs the following scripts in a specific order:
 
 PDF.PY
 •	Opens an Excel Workbook
