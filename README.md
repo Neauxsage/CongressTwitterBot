@@ -1,31 +1,24 @@
 # CongressTwitterBot
 
 - [CongressTwitterBot](#congresstwitterbot)
-  - [ALL.PY](#allpy)
-    - [PDF.PY](#pdfpy)
-    - [BILL.PY](#billpy)
-    - [TEST.PY](#testpy)
-    - [DEL.PY](#delpy)
-    - [CLEARXL.PY](#clearxlpy)
+  - [all.py](#allpy)
+    - [bill.py](#billpy)
+    - [pdf.py](#pdfpy)
+    - [clearXL.py](#clearxlpy)
+    - [del.py](#delpy)
+    - [test.py](#testpy)
 
-## ALL.PY
+## all.py
 
 Runs the following scripts in a specific order:
 
-### PDF.PY
+```mermaid
+graph LR
+bill.py-->pdf.py-->clearXL.py-->del.py-->test.py
 
-- Opens an Excel Workbook
-- Accesses a Specific Worksheet
-- Parses and Cleans URLs
-- Saves Data to Excel
-- Web Scraping Setup
-- Navigates to a URL
-- Extracts Links
-- Selects a New Link
-- Saves the Original and Cleaned Links
-- Closes the Web Browser
+```
 
-### BILL.PY
+### bill.py
 
 - Retrieves the current working directory.
 - Loads an Excel workbook named 'links.xlsx' and accesses a specific sheet 'text'.
@@ -43,7 +36,51 @@ Runs the following scripts in a specific order:
 - Executing the Script:
   - Runs the main function if the script is executed as the main program.
 
-### TEST.PY
+### pdf.py
+
+- Opens an Excel Workbook
+- Accesses a Specific Worksheet
+- Parses and Cleans URLs
+- Saves Data to Excel
+- Web Scraping Setup
+- Navigates to a URL
+- Extracts Links
+- Selects a New Link
+- Saves the Original and Cleaned Links
+- Closes the Web Browser
+
+### clearXL.py
+
+- Retrieves the current working directory using `os.getcwd()`.
+- Constructs the file path for an Excel workbook named 'links.xlsx' located in the current directory.
+- Loads the Excel workbook located at the constructed path.
+- Selects a sheet within the workbook named "text".
+- Deletes all rows in the "text" sheet, effectively clearing all cells.
+- Saves the changes made to the workbook.
+- Closes the workbook to free up system resources.
+- Prints a message indicating the successful clearance of the cells.
+
+### del.py
+
+- Word Count in .docx Files:
+  - Defines a function `count_words_in_docx` to count the number of words in a .docx file.
+- Listing Files:
+  - Lists all the files in the directory ./texts/.
+- File Deletion Flag:
+  - Initializes a flag `file_deleted` to track if any file is deleted during the script's execution.
+- File Processing:
+  - Iterates over each file in the ./texts/ directory.
+  - For each file ending with .docx (indicating a Word document):
+    - Counts the number of words in the document.
+    - Prints the file name and its word count.
+    - If the word count exceeds 5,000 words:
+      - Prints a message indicating the file is being deleted.
+      - Deletes the file.
+      - Sets the `file_deleted` flag to True.
+- Conditional Script Execution:
+  - If any file has been deleted (i.e., if `file_deleted` is True), it runs a Python script named all.py.
+
+### test.py
 
 - Initial Setup:
   - Imports necessary libraries.
@@ -69,34 +106,3 @@ Runs the following scripts in a specific order:
 - Spreadsheet Update (Error Handling):
   - In case of a tweet error, deletes all documents in 'texts'.
   - Updates and manages a 'links' spreadsheet, deleting the last row if needed.
-
-### DEL.PY
-
-- Word Count in .docx Files:
-  - Defines a function `count_words_in_docx` to count the number of words in a .docx file.
-- Listing Files:
-  - Lists all the files in the directory ./texts/.
-- File Deletion Flag:
-  - Initializes a flag `file_deleted` to track if any file is deleted during the script's execution.
-- File Processing:
-  - Iterates over each file in the ./texts/ directory.
-  - For each file ending with .docx (indicating a Word document):
-    - Counts the number of words in the document.
-    - Prints the file name and its word count.
-    - If the word count exceeds 5,000 words:
-      - Prints a message indicating the file is being deleted.
-      - Deletes the file.
-      - Sets the `file_deleted` flag to True.
-- Conditional Script Execution:
-  - If any file has been deleted (i.e., if `file_deleted` is True), it runs a Python script named all.py.
-
-### CLEARXL.PY
-
-- Retrieves the current working directory using `os.getcwd()`.
-- Constructs the file path for an Excel workbook named 'links.xlsx' located in the current directory.
-- Loads the Excel workbook located at the constructed path.
-- Selects a sheet within the workbook named "text".
-- Deletes all rows in the "text" sheet, effectively clearing all cells.
-- Saves the changes made to the workbook.
-- Closes the workbook to free up system resources.
-- Prints a message indicating the successful clearance of the cells.
